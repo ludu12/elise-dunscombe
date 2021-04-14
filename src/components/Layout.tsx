@@ -2,9 +2,35 @@ import React from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
 import BurgerMenuButton from './BurgerMenuButton';
+import NavLink from './NavLink';
+import { FaFacebook, FaInstagram, FaLinkedin } from 'react-icons/fa';
+
+const MobileNavMenu: React.FC<{ open: boolean }> = (props) => {
+  const [open, setOpen] = React.useState<boolean>(props.open);
+  React.useEffect(() => {
+    setTimeout(() => setOpen(props.open), 0);
+  }, [props.open]);
+  return (
+    <div
+      className={`transition-all duration-500 ease-in-out bg-white overflow-hidden ${
+        open ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      <nav
+        className={
+          'flex flex-col items-center text-center w-full h-screen pt-32'
+        }
+      >
+        <NavLink href={'/about'} text={'About Me'} />
+        <NavLink href={'/resume'} text={'Resume'} />
+        <NavLink href={'/portfolio'} text={'Portfolio'} />
+        <NavLink href={'/experience'} text={'Experience'} />
+      </nav>
+    </div>
+  );
+};
 
 const Layout: React.FC<{ title: string }> = (props) => {
-
   const [open, setOpen] = React.useState<boolean>(false);
 
   return (
@@ -13,51 +39,68 @@ const Layout: React.FC<{ title: string }> = (props) => {
         <title>{`Elise Dunscombe - ${props.title}`}</title>
         <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <link href="dist/hamburgers.css" rel="stylesheet"/>
       </Head>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <header className="bg-white pt-4">
-          <div className='border-b-2 border-gray-100'>
-            <nav className="py-4">
-              <div className="flex justify-between items-center">
-                <Link href="/">
-                  <a className="text-2xl">ELISE DUNSCOMBE</a>
-                </Link>
-                <div className={'sm:hidden'}>
-                  <BurgerMenuButton onClick={() => setOpen(!open)} open={open}/>
-                </div>
+        <header className="bg-white py-4">
+          <div className="py-4 border-b-2 border-gray-100">
+            <div className="flex justify-between items-center">
+              <Link href="/">
+                <a className="text-2xl">ELISE DUNSCOMBE</a>
+              </Link>
+              <nav className={'transition-all duration-500 hidden md:flex'}>
+                <NavLink href={'/about'} text={'About Me'} />
+                <NavLink href={'/resume'} text={'Resume'} />
+                <NavLink href={'/portfolio'} text={'Portfolio'} />
+                <NavLink href={'/experience'} text={'Experience'} />
+              </nav>
+              <div className={'transition-all duration-500 md:hidden z-50'}>
+                <BurgerMenuButton onClick={() => setOpen(!open)} open={open} />
               </div>
-            </nav>
+            </div>
           </div>
-
-          {/*<nav id="site-menu"*/}
-          {/*     className="flex flex-col sm:flex-row w-full justify-between items-center px-4 sm:px-6 py-1 bg-white shadow sm:shadow-none border-t-4 border-red-900">*/}
-          {/*  <div*/}
-          {/*    className="w-full sm:w-auto self-start sm:self-center flex flex-row sm:flex-none flex-no-wrap justify-between items-center">*/}
-          {/*    <a href="#" className="no-underline py-1">*/}
-          {/*      <h1 className="font-bold text-lg tracking-widest">LOGO</h1>*/}
-          {/*    </a>*/}
-          {/*    <button id="menuBtn" className="hamburger block sm:hidden focus:outline-none" type="button"*/}
-          {/*            onClick="navToggle();">*/}
-          {/*      <span className="hamburger__top-bun"></span>*/}
-          {/*      <span className="hamburger__bottom-bun"></span>*/}
-          {/*    </button>*/}
-          {/*  </div>*/}
-          {/*  <div id="menu"*/}
-          {/*       className="w-full sm:w-auto self-end sm:self-center sm:flex flex-col sm:flex-row items-center h-full py-1 pb-4 sm:py-0 sm:pb-0 hidden">*/}
-          {/*    <a*/}
-          {/*      className="text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:pr-4 py-2 sm:py-1 sm:pt-2"*/}
-          {/*      href="https://ttntm.me/blog/tailwind-responsive-menu/" target="_blank">About</a>*/}
-          {/*    <a*/}
-          {/*      className="text-dark font-bold hover:text-red text-lg w-full no-underline sm:w-auto sm:px-4 py-2 sm:py-1 sm:pt-2"*/}
-          {/*      href="#bottom">Features</a>*/}
-          {/*  </div>*/}
-          {/*</nav>*/}
         </header>
+        <div
+          className={`absolute top-0 left-0 w-full ${
+            open ? 'visible' : 'hidden'
+          }`}
+        >
+          <MobileNavMenu open={open} />
+        </div>
         {props.children}
+        <footer className={'flex py-4'}>
+          <div
+            className={
+              'border-t-2 py-4 border-gray-100 w-full grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-56 lg:gap-96'
+            }
+          >
+            <div>
+              <h1 className={'text-2xl'}>ELISE DUNSCOMBE</h1>
+              <div className="grid grid-cols-6 gap-1 text-xl pt-4">
+                <a href="#">
+                  <FaFacebook />
+                </a>
+                <a href="#">
+                  <FaInstagram />
+                </a>
+                <a href="#">
+                  <FaLinkedin />
+                </a>
+              </div>
+            </div>
+            <div className={'grid grid-cols-2 md:text-right'}>
+              <NavLink href={'/about'} text={'About Me'} disablePadding />
+              <NavLink href={'/resume'} text={'Resume'} disablePadding />
+              <NavLink href={'/portfolio'} text={'Portfolio'} disablePadding />
+              <NavLink
+                href={'/experience'}
+                text={'Experience'}
+                disablePadding
+              />
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
 };
-
 export default Layout;
