@@ -6,7 +6,7 @@ const Index: React.FC = () => {
     <Layout title={'Home'}>
       <main>
         <figure className="md:flex md:flex-row-reverse">
-          <div className="flex-1 w-96 h-96 bg-green-500" />
+          <div className="flex-1 w-full h-96 bg-green-500" />
           <div className="flex-1">
             <p>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

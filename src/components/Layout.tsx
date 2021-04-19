@@ -40,7 +40,7 @@ const Layout: React.FC<{ title: string }> = (props) => {
         <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
         <meta content="width=device-width, initial-scale=1" name="viewport" />
       </Head>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className={`max-w-7xl mx-auto px-4 ${open ? 'fixed' : ''}`}>
         <header className="bg-white py-4">
           <div className="py-4 border-b-2 border-gray-100">
             <div className="flex justify-between items-center">
@@ -60,9 +60,7 @@ const Layout: React.FC<{ title: string }> = (props) => {
           </div>
         </header>
         <div
-          className={`absolute top-0 left-0 w-full ${
-            open ? 'visible' : 'hidden'
-          }`}
+          className={`fixed top-0 left-0 w-full ${open ? 'visible' : 'hidden'}`}
         >
           <MobileNavMenu open={open} />
         </div>

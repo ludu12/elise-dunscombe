@@ -8,9 +8,12 @@ interface BurgerProps {
 const BurgerMenuButton: React.FC<BurgerProps> = ({ open, onClick }) => {
   return (
     <button
-      className={`hamburger hamburger--spin ${open ? 'is-active' : ''}`}
+      className={`text-xs hamburger hamburger--spin ${open ? 'is-active' : ''}`}
       onClick={onClick}
       type="button"
+      style={{
+        fontSize: '0.05em',
+      }}
     >
       <span className="hamburger-box">
         <span className="hamburger-inner" />
