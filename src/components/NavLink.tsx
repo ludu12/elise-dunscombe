@@ -20,9 +20,9 @@ const NavLink: React.FC<NavLinkProps> = (props) => {
   return (
     <Link href={props.href} passHref>
       <a
-        className={`hover:underline ${isActive ? 'text-indigo-600' : ''} ${
-          props.disablePadding ? '' : 'p-4'
-        }`}
+        className={`hover:underline hover:text-green-600 ${
+          isActive ? 'text-green-600' : ''
+        } ${props.disablePadding ? '' : 'p-4'}`}
       >
         {props.text}
       </a>

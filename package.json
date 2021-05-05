@@ -12,6 +12,7 @@
     "verify": "npm run lint && npm run format && npm run type-check"
   },
   "dependencies": {
+    "@formspree/react": "^2.2.3",
     "date-fns": "^2.11.1",
     "gray-matter": "^4.0.2",
     "next": "^10.0.0",
