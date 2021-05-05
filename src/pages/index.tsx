@@ -74,7 +74,7 @@ const Index: React.FC<{ images: ImageObj[] }> = (props) => {
             </p>
             <br />
             <p>
-              n my free time, I enjoy reading new books, catching up with
+              In my free time, I enjoy reading new books, catching up with
               friends, trying different foods, and spending time outdoors. I
               also really enjoy travelling and seeing new places! I’m a very
               go-with-the-flow kind of person who always aims to keep positive
