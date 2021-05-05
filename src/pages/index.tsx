@@ -1,24 +1,57 @@
 import React from 'react';
 import Layout from '../components/Layout';
 import Image from 'next/image';
+import { GetStaticProps } from 'next';
+import { ImageObj } from '../lib/types';
+import { getAboutMeImages } from '../lib/image';
 
-const Index: React.FC = () => {
+const imageAspectStyle = {
+  minHeight: '32rem',
+  minWidth: '24rem',
+};
+
+const Index: React.FC<{ images: ImageObj[] }> = (props) => {
+  const images = props.images;
+  const image = images[3]; // grad pic
+
+  const [isVisible] = React.useState(true);
+  // const [imageIndex, setImageIndex] = React.useState(getRandomInt(0, images.length - 1));
+  // const [image, setImage] = React.useState(images[imageIndex]);
+
+  // useInterval(() => {
+  //   setImageIndex((imageIndex + 1) % images.length)
+  // }, 5000);
+  //
+  // React.useEffect(() => {
+  //   setVisible(false);
+  //
+  //   const id = setTimeout(() => {
+  //     setVisible(true);
+  //     setImage(images[imageIndex]);
+  //   }, 500);
+  //   return () => clearTimeout(id);
+  // }, [imageIndex]);
+
   return (
     <Layout title={'Home'}>
       <h1 className={'text-2xl'}>About Me</h1>
       <main className="mt-2">
         <div className="md:flex md:flex-row-reverse">
-          <div className="flex-1 md:ml-2 relative">
+          <div
+            className={`flex-1 md:ml-2 relative transition-all duration-500 ${
+              isVisible ? 'opacity-1' : 'opacity-0'
+            }`}
+            style={imageAspectStyle}
+          >
             <Image
               priority
-              src="/images/about/IMG_2336.PNG"
-              alt="Picture of the author"
-              width={1125}
-              height={1683}
-              layout="intrinsic"
+              src={image.src}
+              alt={image.alt}
+              layout="fill"
+              objectFit="contain"
             />
           </div>
-          <div className="flex-1 md:mr-2 md:p-0 pt-4">
+          <div className="flex-3 md:mr-2 md:p-0 pt-4">
             <p>
               My name is Elise Dunscombe and I’m a recent grad from the
               University of Iowa. I received a BBA in Marketing on the Retail
@@ -52,6 +85,15 @@ const Index: React.FC = () => {
       </main>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const images = await getAboutMeImages();
+  return {
+    props: {
+      images,
+    },
+  };
 };
 
 export default Index;
