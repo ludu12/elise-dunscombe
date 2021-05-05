@@ -33,7 +33,7 @@ const Index: React.FC<{ images: ImageObj[] }> = (props) => {
   // }, [imageIndex]);
 
   return (
-    <Layout title={'Home'}>
+    <Layout title={'About Me'}>
       <h1 className={'text-2xl'}>About Me</h1>
       <main className="mt-2">
         <div className="md:flex md:flex-row-reverse">

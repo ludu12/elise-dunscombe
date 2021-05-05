@@ -53,7 +53,7 @@ const Layout: React.FC<{ title: string }> = (props) => {
           <div className="py-4 border-b-2 border-gray-100">
             <div className="flex justify-between items-center">
               <Link href="/">
-                <a className="text-2xl">ELISE DUNSCOMBE</a>
+                <a className="text-2xl font-bold">ELISE DUNSCOMBE</a>
               </Link>
               <nav className={'hidden md:flex'}>
                 <NavLink href={'/'} text={'About Me'} />
@@ -76,7 +76,7 @@ const Layout: React.FC<{ title: string }> = (props) => {
             }
           >
             <div>
-              <h1 className={'text-2xl'}>ELISE DUNSCOMBE</h1>
+              <h1 className={'text-2xl font-bold'}>ELISE DUNSCOMBE</h1>
               <div className="grid grid-cols-6 gap-1 text-xl pt-4">
                 <a
                   href="https://www.facebook.com/elise.dunscombe"
@@ -101,7 +101,7 @@ const Layout: React.FC<{ title: string }> = (props) => {
                 </a>
               </div>
             </div>
-            <div className={'grid grid-cols-2 md:text-right'}>
+            <div className={'grid grid-cols-2 md:text-right pr-4'}>
               <NavLink href={'/'} text={'About Me'} disablePadding />
               <NavLink href={'/resume'} text={'Resume'} disablePadding />
               <NavLink href={'/canva'} text={'Canva'} disablePadding />
