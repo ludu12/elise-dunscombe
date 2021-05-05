@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { GetStaticProps } from 'next';
 import { ImageObj } from '../lib/types';
 import { getAboutMeImages } from '../lib/image';
+import { useImageCarousel } from '../hooks/use-image-carousel';
 
 const imageAspectStyle = {
   minHeight: '32rem',
@@ -12,25 +13,7 @@ const imageAspectStyle = {
 
 const Index: React.FC<{ images: ImageObj[] }> = (props) => {
   const images = props.images;
-  const image = images[3]; // grad pic
-
-  const [isVisible] = React.useState(true);
-  // const [imageIndex, setImageIndex] = React.useState(getRandomInt(0, images.length - 1));
-  // const [image, setImage] = React.useState(images[imageIndex]);
-
-  // useInterval(() => {
-  //   setImageIndex((imageIndex + 1) % images.length)
-  // }, 5000);
-  //
-  // React.useEffect(() => {
-  //   setVisible(false);
-  //
-  //   const id = setTimeout(() => {
-  //     setVisible(true);
-  //     setImage(images[imageIndex]);
-  //   }, 500);
-  //   return () => clearTimeout(id);
-  // }, [imageIndex]);
+  const [nextImage, imageClassName] = useImageCarousel(images, 3); // Grad pic
 
   return (
     <Layout title={'About Me'}>
@@ -38,18 +21,21 @@ const Index: React.FC<{ images: ImageObj[] }> = (props) => {
       <main className="mt-2">
         <div className="md:flex md:flex-row-reverse">
           <div
-            className={`flex-1 md:ml-2 relative transition-all duration-500 ${
-              isVisible ? 'opacity-1' : 'opacity-0'
-            }`}
+            className={`flex-1 cursor-pointer md:ml-2 relative`}
+            onClick={nextImage}
             style={imageAspectStyle}
           >
-            <Image
-              priority
-              src={image.src}
-              alt={image.alt}
-              layout="fill"
-              objectFit="contain"
-            />
+            {images.map((image) => (
+              <Image
+                key={image.src}
+                className={imageClassName(image)}
+                priority
+                src={image.src}
+                alt={image.alt}
+                layout="fill"
+                objectFit="contain"
+              />
+            ))}
           </div>
           <div className="flex-3 md:mr-2 md:p-0 pt-4">
             <p>
