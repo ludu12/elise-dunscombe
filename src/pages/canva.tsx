@@ -37,22 +37,6 @@ const Canva: React.FC<{ images: ImageObj[] }> = (props) => {
             />
           ))}
         </div>
-        {/*<div className={'grid md:grid-cols-2 lg:grid-cols-3 gap-2'}>*/}
-        {/*  {images.map((i) => {*/}
-        {/*    return (*/}
-        {/*      // <div key={i.src} className='relative' style={{ minWidth: `${i.ratio * constant}rem`, minHeight: `${constant}rem`}}>*/}
-        {/*      <div key={i.src} className="relative" style={imageAspectStyle}>*/}
-        {/*        <Image*/}
-        {/*          priority*/}
-        {/*          src={i.src}*/}
-        {/*          alt={i.alt}*/}
-        {/*          layout="fill"*/}
-        {/*          objectFit="contain"*/}
-        {/*        />*/}
-        {/*      </div>*/}
-        {/*    );*/}
-        {/*  })}*/}
-        {/*</div>*/}
       </main>
     </Layout>
   );
